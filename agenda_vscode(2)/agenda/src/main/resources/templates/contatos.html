@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <a href="/index">HOME</a> |
+        <span th:if="${session.idUsuarioLogado > 0 }">
+            <a href="/contatos">CONTATOS</a> |
+            <a href="/logout">LOGOUT</a>
+        </span>
+        <span th:unless="${session.idUsuarioLogado > 0}">
+            <a href="/login">LOGIN</a>
+        </span>
+    </nav>
+    <hr />
+    <h2>Lista de usuários cadastrados</h2>
+    <a href="/cadastraEscolar"><button>Novo Cont. Escolar</button></a> -
+    <a href="/cadastraFamiliar"><button>Novo Cont. Familiar</button></a>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Apelido</th>
+            <th>Telefone</th>
+            <th>Tipo</th>
+            <th>Opções</th>
+        </tr>
+        <tr th:each="contato : ${contatos}">
+            <td th:text=${contato.id}></td>
+            <td th:text=${contato.nome}></td>
+            <td th:text=${contato.apelido}></td>
+            <td th:text=${contato.telefone}></td>
+            <td th:text="${contato.ehFamiliar} ? 'Familiar' : 'Escolar'"></td>
+            <td th:switch="${contato.ehFamiliar}">
+                <span th:case="true">
+                    <a th:href="@{/editaFamiliar/{id}(id=${contato.id})}"><button>EDITAR</button></a>
+                    <a th:href="@{/consultaFamiliar/{id}(id=${contato.id})}"><button>DETALHES</button></a>
+                </span>
+                <span th:case="false">
+                    <a th:href="@{/editaEscolar/{id}(id=${contato.id})}"><button>EDITAR</button></a>
+                    <a th:href="@{/consultaEscolar/{id}(id=${contato.id})}"><button>DETALHES</button></a>
+                </span>
+                <a th:href="@{/removeContato/{id}(id=${contato.id})}"><button>REMOVER</button></a>
+            </td>
+            </span>
+        </tr>
+    </table>
+</body>
+
+</html>

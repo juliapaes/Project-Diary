@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <nav>
+        <a href="/index">HOME</a> |
+        <span th:if="${session.idUsuarioLogado > 0 }">
+            <a href="/contatos">CONTATOS</a> |
+            <a href="/logout">LOGOUT</a>
+        </span>
+        <span th:unless="${session.idUsuarioLogado > 0}">
+            <a href="/login">LOGIN</a>
+        </span>
+    </nav>
+    <hr />
+    <h2>Formulario de Cadadastro</h2>
+    <form method="post">
+        <p>E-mail:<input type="text" name="email" required="required"></p>
+        <p>Senha:<input type="password" name="senha" required="required"></p>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>

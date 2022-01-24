@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <a href="/index">HOME</a> |
+        <span th:if="${session.idUsuarioLogado > 0 }">
+            <a href="/contatos">CONTATOS</a> |
+            <a href="/logout">LOGOUT</a>
+        </span>
+        <span th:unless="${session.idUsuarioLogado > 0}">
+            <a href="/login">LOGIN</a>
+        </span>
+    </nav>
+    <hr />
+    <div th:text="${msg}"></div>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <a href="/index">HOME</a> |
+        <span th:if="${session.idUsuarioLogado > 0 }">
+            <a href="/contatos">CONTATOS</a> |
+            <a href="/logout">LOGOUT</a>
+        </span>
+        <span th:unless="${session.idUsuarioLogado > 0}">
+            <a href="/login">LOGIN</a>
+        </span>
+    </nav>
+    <hr />
+    <h2>Edita Contato Escolar</h2>
+    <form method="post">
+        <p>ID:<input readonly th:value=${contato.id}></label></p>
+        <p>Nome:<input type="text" name="nome" required="required" th:value="${contato.nome}" /></p>
+        <p>Apelido:<input type=" text" name="apelido" required="required" th:value="${contato.apelido}" /></p>
+        <p>Endereco:<input type="text" name="endereco" required="required" th:value="${contato.endereco}" /></p>
+        <p>Telefone:<input type="text" name="telefone" required="required" th:value="${contato.telefone}" /></p>
+        <p>Aniversario (dd/mm/yyyy):
+            <input type="text" name="aniversario.dia" required="required" th:value="${contato.aniversario.dia}"
+                maxlength="2" size="2" /> /
+            <input type="text" name="aniversario.mes" required="required" th:value="${contato.aniversario.mes}"
+                maxlength="2" size="2" /> /
+            <input type="text" name="aniversario.ano" required="required" th:value="${contato.aniversario.ano}"
+                maxlength="4" size="4" minlength="4" />
+        </p>
+        <p>Email:<input type="text" name="email.emailPrincipal" required="required"
+                th:value="${contato.email.emailPrincipal}" /></p>
+        <p>Email:<input type="text" name="email.emailSecundario" required="required"
+                th:value="${contato.email.emailSecundario}" /></p>
+        <p>Colega:<input type="text" name="ehColega" required="required" th:value="${contato.ehColega}" /></p>
+        <p>Professor:<input type="text" name="ehProfessor" required="required" th:value="${contato.ehProfessor}" /></p>
+        <p>Amigo:<input type="text" name="ehAmigo" required="required" th:value="${contato.ehAmigo}" /></p>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>
